@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Goggles Control</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Smart Goggles Control Panel</h1>
+    <button onclick="sendCommand('temperature')">Get Temperature</button>
+    <button onclick="sendCommand('location')">Get Location</button>
+    <button onclick="sendCommand('time')">Get Time</button>
+
+    <p id="response"></p>
+
+    <script>
+        function sendCommand(command) {
+            fetch(`https://api.smartgoggles.com/control?command=${command}`)
+            .then(response => response.text())
+            .then(data => document.getElementById('response').innerText = data)
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
